@@ -14,30 +14,17 @@ provider "google" {
   region  = var.region
 }
 
-resource "google_sql_database" "database" {
-  name     = "my-database"
-  instance = google_sql_database_instance.sql-instance.name
-}
-
-resource "google_sql_database_instance" "sql-instance" {
-  name = "sql-instance1"
-  region = var.region
-  database_version = "POSTGRES_11"
-   
+resource "google_sql_database_instance" "main" {
+  name             = "main-instance"
+  database_version = "POSTGRES_14"
+  region           = "us-central1"
 
   settings {
+    # Second-generation instance tiers are based on the machine
+    # type. See argument reference below.
     tier = "db-f1-micro"
   }
 }
-
-resource "google_sql_user" "users"{
-   name = "root"
-   password = "root"
-   instance = google_sql_database_instance.sql-instance.name
-}
-
-
-
 
 
 
