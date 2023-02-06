@@ -1,0 +1,8 @@
+steps:
+- name: 'gcr.io/cloud-builders/gcloud'
+  args: ['sql', 'connect', 'postgres-instance', '--user=postgres']
+  env:
+    - 'SQL_IP_ADDRESS=127.0.0.1'
+
+- name: 'gcr.io/cloud-builders/psql'
+  args: ['-f', 'postgres-db-create.sql']
