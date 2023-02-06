@@ -1,9 +1,19 @@
 steps:
-- name: 'gcr.io/cloud-builders/gcloud'
-  args: ['sql', 'connect', 'postgres-instance', '--user=postgres']
-  env:
-    - 'SQL_IP_ADDRESS=127.0.0.1'
-
-- name: 'gcr.io/cloud-builders/psql'
-  args: ['-f', 'postgres-db-create.sql']
-  
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args: ['components', 'install', 'cloud-sql-proxy']
+  - name: 'gcr.io/cloud-builders/terraform'
+    args: ['init']
+  - name: 'gcr.io/cloud-builders/terraform'
+    args: ['plan', '-out=plan.out']
+  - name: 'gcr.io/cloud-builders/terraform'
+    args: ['apply', 'plan.out']
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args: ['sql', 'connect', 'postgres-instance', '--user=postgres']
+    env:
+      - 'SQL_IP_ADDRESS=localhost'
+      - 'SQL_PORT=5432'
+  - name: 'gcr.io/cloud-builders/psql'
+    args: ['postgresql://postgres@$SQL_IP_ADDRESS:$SQL_PORT/postgres', '-f', './script.sql']
+    env:
+      - 'SQL_IP_ADDRESS=localhost'
+      - 'SQL_PORT=5432'
