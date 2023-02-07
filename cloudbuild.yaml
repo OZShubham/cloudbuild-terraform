@@ -24,6 +24,22 @@ steps:
       echo "$BRANCH_NAME"
       echo "***********************"
 
+- id: 'tf destroy'
+  name: 'hashicorp/terraform:1.0.0'
+  entrypoint: 'sh'
+  args: 
+  - '-c'
+  - | 
+      if [ -d "environments/$BRANCH_NAME/" ]; then
+        cd environments/$BRANCH_NAME      
+        terraform destroy -auto-approve
+      else
+        echo "***************************** SKIPPING DESTROY *******************************"
+        echo "Branch '$BRANCH_NAME' does not represent an official environment."
+        echo "*****************************************************************************"
+      fi
+     
+
 - id: 'tf init'
   name: 'hashicorp/terraform:1.0.0'
   entrypoint: 'sh'
