@@ -1,23 +1,28 @@
-name: Upload to Cloud Storage
+name: Upload file to Google Cloud Storage
 
 on:
   push:
     branches:
-      - master
+      - main
+
+env:
+  ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
 
 jobs:
-  job_id:
+  upload_to_gcs:
     runs-on: ubuntu-latest
 
     steps:
-    - id: 'auth'
-      uses: 'google-github-actions/auth@v1'
-      with:
-        workload_identity_provider: 'projects/209318686550/locations/global/workloadIdentityPools/github-actions/providers/my-provider'
-        service_account: 'github@practice-377017.iam.gserviceaccount.com'
-        
-    - id: 'upload-file'
-      uses: 'google-github-actions/upload-cloud-storage@v1'
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Authenticate with Google
+      uses: google-github-actions/auth@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+
+    - name: Upload file to Google Cloud Storage
+      uses: google-github-actions/upload-cloud-storage@v1
       with:
         path: '/OZShubham/cloudbuild-terraform/sqlscripts/table.sql'
         destination: 'bucket-shu/table.sql'
