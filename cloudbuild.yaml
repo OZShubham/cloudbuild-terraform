@@ -78,8 +78,7 @@ steps:
       fi 
 # [END tf-plan]
 
-- name: "gcr.io/cloud-builders/terraform"
-  args: ["destroy", "-auto-approve"]
+
      
 
 # [START tf-apply]
