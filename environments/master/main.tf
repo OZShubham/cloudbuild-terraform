@@ -35,7 +35,7 @@ resource "google_sql_user" "users"{
    password = "root"
    instance = google_sql_database_instance.sql-instance.name
 }
-
+ 
   
 
 
