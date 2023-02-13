@@ -3,7 +3,7 @@ name: Upload file to Google Cloud Storage
 on:
   push:
     branches:
-      - main
+      - master
 
 env:
   ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
