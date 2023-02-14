@@ -11,7 +11,8 @@ jobs:
       id-token: 'write'
 
     steps:
-    
+    - name: Checkout code
+      uses: actions/checkout@v2
     - id: 'auth'
       uses: 'google-github-actions/auth@v1'
       with:
