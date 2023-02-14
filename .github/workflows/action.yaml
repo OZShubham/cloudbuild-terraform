@@ -21,7 +21,7 @@ jobs:
     - id: 'upload-file'
       uses: 'google-github-actions/upload-cloud-storage@v1'
       with:
-        path: "./sqlscripts/table.sql"
+        path: "https://github.com/OZShubham/cloudbuild-terraform/blob/16d125ca00b9e39b451d696f96cb74524ed27ce3/sqlscripts/table.sql"
         destination: 'bucket-shu/table.sql'
 
     
