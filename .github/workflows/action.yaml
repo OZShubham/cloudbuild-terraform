@@ -23,8 +23,4 @@ jobs:
         path: '/path/to/file'
         destination: 'bucket-name/file'
 
-    # Example of using the output
-    - id: 'uploaded-files'
-      uses: 'foo/bar@main'
-      env:
-        file: '${{ steps.upload-file.outputs.uploaded }}'
+    
