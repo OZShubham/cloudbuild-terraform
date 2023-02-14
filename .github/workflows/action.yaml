@@ -22,5 +22,5 @@ jobs:
       uses: google-github-actions/upload-cloud-storage@v1
       with:
         path: "./sqlscripts/table.sql"
-        destination: "gs://my-bucket/table.sql"
+        destination: "gs://bucket-shu/table.sql"
     
