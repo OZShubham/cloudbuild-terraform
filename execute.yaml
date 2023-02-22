@@ -27,3 +27,5 @@ steps:
       - |
         killall cloud_sql_proxy
         rm cloud_sql_proxy
+options:
+  logging: NONE
