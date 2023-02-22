@@ -2,10 +2,10 @@
 - id: 'Execute SQL file'
   name: 'postgres:11'
   env:
-    - DB_USERNAME=[quickstart-user]
-    - DB_PASSWORD=[shubham]
-    - DB_NAME=[quickstart_db]
-    - SQL_FILE_PATH=[gs:\\bucket-shu\\sqlscripts\\table.sql]
+    - DB_USERNAME= quickstart-user
+    - DB_PASSWORD= shubham
+    - DB_NAME= quickstart_db
+    - SQL_FILE_PATH= "gs:\\bucket-shu\\sqlscripts\\table.sql"
   entrypoint: 'sh'
   args:
   - '-c'
