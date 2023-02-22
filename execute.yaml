@@ -2,14 +2,14 @@
 steps:
 - id: 'Execute SQL file'
   name: 'postgres:11'
-  env:
-    - DB_USERNAME= quickstart-user
-    - DB_PASSWORD= shubham
-    - DB_NAME= quickstart_db
-    - SQL_FILE_PATH= "gs:\\bucket-shu\\sqlscripts\\table.sql"
+ # env:
+  #  - DB_USERNAME= quickstart-user
+   # - DB_PASSWORD= shubham
+   # - DB_NAME= quickstart_db
+   # - SQL_FILE_PATH= "gs:\\bucket-shu\\sqlscripts\\table.sql"
   entrypoint: 'sh'
   args:
   - '-c'
   - |
-      psql -U $DB_USERNAME -W -d $DB_NAME -f $SQL_FILE_PATH
+      psql -U "quickstart-user" -W -d "quickstart_db" -f "gs:\\bucket-shu\\sqlscripts\\table.sql"
 # [END execute-sql]
