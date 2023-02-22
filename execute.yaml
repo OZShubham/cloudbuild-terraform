@@ -1,12 +1,16 @@
 steps:
-- name: gcr.io/cloud-builders/gsutil
-  args: ['cp', 'gs://bucket-shu/table.sql', '.']
-- name: postgres
-  entrypoint: /bin/bash
+- name: 'gcr.io/cloud-builders/gsutil'
+  entrypoint: 'bash'
   args:
-  - -c
+  - '-c'
   - |
-    psql -h quickstart-instance -d quickstart_db -U postgres -f table.sql -v ON_ERROR_STOP=1 -q
+    gsutil cp gs://bucket-shu/table.sql .
+- name: 'postgres'
+  entrypoint: 'bash'
+  args:
+  - '-c'
+  - |
+    export PGPASSWORD=shubham
+    psql -h quickstart-instance -U postgres -d quickstart_db -f table.sql
   env:
   - 'PGPASSWORD=shubham'
-  image: postgres:latest
