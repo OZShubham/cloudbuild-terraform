@@ -1,15 +1,8 @@
 # [START execute-sql]
 steps:
-- id: 'Execute SQL file'
-  name: 'postgres:11'
- # env:
-  #  - DB_USERNAME= quickstart-user
-   # - DB_PASSWORD= shubham
-   # - DB_NAME= quickstart_db
-   # - SQL_FILE_PATH= "gs:\\bucket-shu\\sqlscripts\\table.sql"
-  entrypoint: 'sh'
-  args:
-  - '-c'
-  - |
-      psql -U "quickstart-user" -W -d "quickstart_db" -f "gs:\\bucket-shu\\sqlscripts\\table.sql"
-# [END execute-sql]
+- name: gcr.io/cloud-builders/docker
+  args: ['run', '--network=host', 'postgres:11', 'psql', '-h', 'localhost', '-U', '${_DB_USER}', '-f', '${_SQL_FILE}']
+  env:
+  - 'DB_USER=quickstart-user'
+  - 'SQL_FILE=gs:\\bucket-shu\\sqlscripts\\table.sql'
+
