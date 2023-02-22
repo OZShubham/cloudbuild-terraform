@@ -1,8 +1,14 @@
-# [START execute-sql]
+
 steps:
-- name: gcr.io/cloud-builders/docker
-  args: ['run', '--network=host', 'postgres:11', 'psql', '-h', 'practice-377017:us-east1:sql-instance1', '-U', '${_DB_USER}', '-f', '${_SQL_FILE}']
+- name: gcr.io/cloud-builders/gcloud
+  entrypoint: 'bash'
+  args:
+  - '-c'
+  - |
+    psql -h HOST -U USERNAME -d DATABASE -f gs:\\bucket-shu\\sqlscripts\\table.sql
   env:
-  - 'DB_USER=quickstart-user'
-  - 'SQL_FILE=gs:\\bucket-shu\\sqlscripts\\table.sql'
+  - 'HOST=34.138.14.82'
+  - 'USERNAME=postgres'
+  - 'DATABASE=postgres'
+  
 
