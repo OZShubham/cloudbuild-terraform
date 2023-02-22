@@ -11,5 +11,5 @@ steps:
       - "-c"
       - |
         apt-get update && apt-get install -y postgresql-client
-        psql "host=34.133.57.245 dbname=quickstart-db user=quickstart-user password=shubham" < table.sql
+        psql "host=34.133.57.245 dbname=quickstart_db user=quickstart-user password=shubham" < table.sql
    
