@@ -4,7 +4,7 @@ steps:
 - name: postgres
   args: ['-h', 'quickstart-instance', '-U', 'postgres', '-d', 'quickstart_db', '-f', 'table.sql']
   env:
-  - 'PGPASSWORD=shubham'
+  - 'POSTGRES_PASSWORD=shubham'
 
 
 
