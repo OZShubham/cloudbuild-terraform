@@ -1,16 +1,12 @@
 steps:
-- name: 'gcr.io/cloud-builders/gsutil'
+- name: 'gcr.io/cloud-builders/gcloud'
   entrypoint: 'bash'
   args:
   - '-c'
-  - |
-    gsutil cp gs://bucket-shu/table.sql .
-- name: 'postgres'
+  - 'gsutil cp gs://<BUCKET_NAME>/table.sql /workspace/table.sql'
+
+- name: 'gcr.io/cloud-builders/postgres'
   entrypoint: 'bash'
   args:
   - '-c'
-  - |
-    export PGPASSWORD=shubham
-    psql -h quickstart-instance -U postgres -d quickstart_db -f table.sql
-  env:
-  - 'PGPASSWORD=shubham'
+  - 'PGPASSWORD=shubham psql -h quickstart-instance -U quickstart-user -d quickstart-db -f /workspace/table.sql'
