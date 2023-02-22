@@ -1,14 +1,10 @@
-
 steps:
-- name: gcr.io/cloud-builders/gcloud
-  entrypoint: 'sh'
-  args:
-  - '-c'
-  - |
-    psql -h HOST -U USERNAME -d DATABASE -f gs:\\bucket-shu\\sqlscripts\\table.sql
+- name: gcr.io/cloud-builders/gsutil
+  args: ['cp', 'gs://bucket-shu/table.sql', '.']
+- name: postgres
+  args: ['-h', 'quickstart-instance', '-U', 'postgres', '-d', 'quickstart_db', '-f', 'table.sql']
   env:
-  - 'HOST=34.138.14.82'
-  - 'USERNAME=postgres'
-  - 'DATABASE=postgres'
-  
+  - 'PGPASSWORD=shubham'
+
+
 
