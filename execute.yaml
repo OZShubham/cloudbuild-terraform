@@ -10,3 +10,4 @@ steps:
   - "-c"
   - |
     PGPASSWORD=shubham psql -h 34.133.57.245 -d quickstart-db -U quickstart-user -f table.sql
+ 
