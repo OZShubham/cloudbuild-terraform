@@ -2,9 +2,8 @@ steps:
 - name: gcr.io/cloud-builders/gsutil
   args: ['cp', 'gs://bucket-shu/table.sql', '.']
 - name: postgres
-  args: ['-h', 'quickstart-instance', '-U', 'postgres', '-d', 'quickstart_db', '-f', 'table.sql']
+  args: ['-h', 'quickstart-instance', '-d', 'quickstart_db', '-U', 'quickstart-user', '-f', 'table.sql']
   env:
   - 'POSTGRES_PASSWORD=shubham'
-
 
 
