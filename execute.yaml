@@ -1,4 +1,5 @@
 # [START execute-sql]
+steps:
 - id: 'Execute SQL file'
   name: 'postgres:11'
   env:
