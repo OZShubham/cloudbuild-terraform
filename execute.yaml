@@ -3,7 +3,7 @@ steps:
   entrypoint: 'bash'
   args:
   - '-c'
-  - 'gsutil cp gs://<BUCKET_NAME>/table.sql /workspace/table.sql'
+  - 'gsutil cp gs://bucket-shu/table.sql /workspace/table.sql'
 
 - name: 'gcr.io/cloud-builders/postgres'
   entrypoint: 'bash'
