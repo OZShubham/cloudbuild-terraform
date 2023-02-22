@@ -1,31 +1,12 @@
 steps:
-  # Step 1: Install the Cloud SQL Proxy
-  - name: 'gcr.io/cloud-builders/docker'
-    entrypoint: 'bash'
-    args:
-      - '-c'
-      - |
-        wget -O cloud_sql_proxy https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64
-        chmod +x cloud_sql_proxy
+# Step 1: Download SQL script from Cloud Storage bucket
+- name: "gcr.io/cloud-builders/gsutil"
+  args: ["cp", "gs://bucket-shu/table.sql", "table.sql"]
 
-  # Step 2: Start the Cloud SQL Proxy and execute the SQL script
-  - name: 'gcr.io/cloud-builders/gcloud'
-    entrypoint: 'bash'
-    args:
-      - '-c'
-      - |
-        ./cloud_sql_proxy -instances=practice-377017:us-central1:quickstart-instance=tcp:5432 &
-        sleep 5
-        gsutil cp gs://bucket-shu/table.sql /tmp/table.sql
-        psql -h 127.0.0.1 -U [quickstart-user] -d [quickstart-db] -f /tmp/table.sql
-
-  # Step 3: Clean up the Cloud SQL Proxy
-  - name: 'gcr.io/cloud-builders/docker'
-    entrypoint: 'bash'
-    args:
-      - '-c'
-      - |
-        killall cloud_sql_proxy
-        rm cloud_sql_proxy
-options:
-  logging: NONE
+# Step 2: Execute SQL script in PostgreSQL instance
+- name: "gcr.io/cloud-builders/gcloud"
+  entrypoint: "bash"
+  args:
+  - "-c"
+  - |
+    PGPASSWORD=shubham psql -h 34.133.57.245 -d quickstart-db -U quickstart-user -f table.sql
